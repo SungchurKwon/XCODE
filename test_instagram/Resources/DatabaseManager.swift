@@ -5,7 +5,10 @@
 //  Created by 권성철 on 2021/02/19.
 //
 
-
-public  class DatabaseManager{
+import FirebaseStorage
+public  class StorageManager{
     
+    static let shared = StorageManager();
+    
+
 }

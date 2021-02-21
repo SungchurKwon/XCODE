@@ -4,7 +4,7 @@
 //
 //  Created by 권성철 on 2021/02/02.
 //
-
+import FirebaseAuth
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -16,14 +16,22 @@ class HomeViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Check auth status
+//        if Auth.auth().currentUser == nil{
+//            //Show log in
+//        }
         handleNotAuthenticated()
+        
     }
     
     private func handleNotAuthenticated(){
         // Show login
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: true)
+        if Auth.auth().currentUser == nil{
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            present(loginVC, animated: true)
+        }
     }
 }
 
