@@ -5,6 +5,7 @@
 //  Created by 권성철 on 2021/02/03.
 //
 
+import SafariServices
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -93,7 +94,7 @@ class LoginViewController: UIViewController {
                               action: #selector(didTapLoginButton),
                               for: .touchUpInside)
         createAccountButton.addTarget(self,
-                              action: #selector(didTapTermsButton),
+                              action: #selector(didTapCreatAccountButton),
                               for: .touchUpInside)
         privacyButton.addTarget(self,
                               action: #selector(didTapPrivacyButton),
@@ -149,16 +150,18 @@ class LoginViewController: UIViewController {
             height: 52
         )
         
-        termsButton.frame = CGRect(x: 10,
-                                   y: view.height - view.safeAreaInsets.bottom - 100,
-                                   width: view.width - 20,
-                                   height: 50)
+        termsButton.frame = CGRect(
+            x: 10,
+            y: view.height - view.safeAreaInsets.bottom - 100,
+            width: view.width - 20,
+            height: 50)
         
         
-        privacyButton.frame = CGRect(x: 10,
-                                   y: view.height - view.safeAreaInsets.bottom - 50,
-                                   width: view.width - 20,
-                                   height: 50)
+        privacyButton.frame = CGRect(
+            x: 10,
+            y: view.height - view.safeAreaInsets.bottom - 50,
+            width: view.width - 20,
+            height: 50)
         
        
         configureHeaderView()
@@ -195,14 +198,37 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func didTapLoginButton() {
+
+        passwordField.resignFirstResponder()
+        usernameEmailField.resignFirstResponder()
         
+        guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty,
+              let password = passwordField.text, !password.isEmpty, password.count >= 8 else{
+            return
+        }
+        //login functionallyty
     }
     
-    @objc private func didTapTermsButton() {}
+    @objc private func didTapTermsButton() {
+        guard let url = URL(string: "https://www.instagram.com/about/legal/terms/before-january-19-2013/")else{
+            return
+        }
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
+    }
     
-    @objc private func didTapPrivacyButton() {}
+    @objc private func didTapPrivacyButton() {
+        guard let url = URL(string: "https://help.instagram.com/519522125107875")else{
+            return
+        }
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
+    }
     
-    @objc private func didTapCreatAccountButton() {}
+    @objc private func didTapCreatAccountButton() {
+        let vc = RegistrationViewController()
+        present(vc, animated: true)
+    }
 
 }
 
