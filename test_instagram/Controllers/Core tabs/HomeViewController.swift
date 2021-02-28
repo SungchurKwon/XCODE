@@ -16,13 +16,8 @@ class HomeViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // Check auth status
-//        if Auth.auth().currentUser == nil{
-//            //Show log in
-//        }
         handleNotAuthenticated()
-        
+          
     }
     
     private func handleNotAuthenticated(){
