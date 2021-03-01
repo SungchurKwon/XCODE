@@ -203,7 +203,17 @@ class LoginViewController: UIViewController {
         usernameEmailField.resignFirstResponder()
         
         guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty,
-              let password = passwordField.text, !password.isEmpty, password.count >= 8 else{
+              let password = passwordField.text, !password.isEmpty, password.count >= 8 else {
+            
+            //error occured
+            let alert = UIAlertController(title: "Inserted values are error",
+                                          message: "We were unalble to log you in.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "continue",
+                                          style: .cancel,
+                                          handler: nil))
+            self.present(alert, animated: true)
+            
             return
         }
         
@@ -219,15 +229,24 @@ class LoginViewController: UIViewController {
             username = usernameEmail
         }
         
-        AuthManager.shared.loginUser(username: username,email: email, password: password) { success in
+        AuthManager.shared.loginUser(username: username, email: email, password: password) { success in
             DispatchQueue.main.async {
                 if success {
                     // user logged in
+                    
+//                    let alert = UIAlertController(title: "Log in success",
+//                                                  message: "SUCCES",
+//                                                  preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "continue",
+//                                                  style: .cancel,
+//                                                  handler: nil))
+//                    self.present(alert, animated: true)
+                    
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     //error occured
                     let alert = UIAlertController(title: "Log in error",
-                                                  message: "We were unalble to log you in.",
+                                                  message: "Paaword or ID is not correct.",
                                                   preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismissed",
                                                   style: .cancel,
