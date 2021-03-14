@@ -40,12 +40,36 @@ final class SettingViewController: UIViewController {
     }
     
     private func configureModels(){
-        let section = [
+        data.append([
+            SettingCellModel(title: "Edit profile") { [weak self] in
+               
+            },
+            SettingCellModel(title: "Invite Friends") { [weak self] in
+               
+            },
+            SettingCellModel(title: "Save Original Posts") { [weak self] in
+               
+            }
+        ])
+        
+        data.append([
+            SettingCellModel(title: "Terms of Service") { [weak self] in
+               
+            },
+            SettingCellModel(title: "Privacy Plicy") { [weak self] in
+               
+            },
+            SettingCellModel(title: "Help / Feedback") { [weak self] in
+               
+            }
+            
+        ])
+        
+        data.append([
             SettingCellModel(title: "Log out") { [weak self] in
                 self?.didTapLogOut()
             }
-        ]
-        data.append(section)
+        ])
     }
     private func didTapLogOut() {
         let actionSheet = UIAlertController(title: "Log Out",
@@ -90,6 +114,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = data[indexPath.section][indexPath.row].title
+        sell.acce
         return cell
     }
     
